@@ -1,0 +1,26 @@
+{
+	"web-dev": {
+	"templateOrigin": ".\\src\\web-dev.template",
+	"vanillaHTML": {
+		"name": "Vanilla HTML/CSS with JS",
+		"description": "Completely Vanilla HTML/CSS with Node.JS for Backend",
+		"requirement": ["NodeJS"],
+
+		"installer": "npm init"
+	},
+	"solidHTML": {
+		"name": "HTML/CSS with Solid",
+		"description": "HTML/CSS but with Solid for better performance and efficiency",
+		"requirement": ["NodeJS"]
+	}
+},
+"cli-app": {
+	"templateOrigin": ".\\src\\cli-app.template",
+	"python": {
+
+	}
+},
+"gui-app": {
+	"templateOrigin": ".\\src\\gui-app.template"
+}
+}
