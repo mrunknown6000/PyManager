@@ -5,13 +5,17 @@
 		"name": "Vanilla HTML/CSS with JS",
 		"description": "Completely Vanilla HTML/CSS with Node.JS for Backend",
 		"requirement": ["NodeJS"],
+		"checkRequirement": ["node -v"],
 
 		"installer": "npm init"
 	},
 	"solidHTML": {
 		"name": "HTML/CSS with Solid",
 		"description": "HTML/CSS but with Solid for better performance and efficiency",
-		"requirement": ["NodeJS"]
+		"requirement": ["NodeJS"],
+		"checkRequirement": ["node -v"],
+
+		"installer": null
 	}
 },
 "cli-app": {

@@ -5,10 +5,18 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Python: Debug the main.py File",
+			"name": "Debug Entire Program",
 			"type": "python",
 			"request": "launch",
 			"program": ".\\main.py",
+			"console": "integratedTerminal",
+			"justMyCode": true
+		},
+		{
+			"name": "Python: Debug New Project Wizard",
+			"type": "python",
+			"request": "launch",
+			"program": ".\\projectWizard.py",
 			"console": "integratedTerminal",
 			"justMyCode": true
 		}
