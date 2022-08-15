@@ -7,7 +7,7 @@
 		"requirement": ["NodeJS"],
 		"checkRequirement": ["node -v"],
 
-		"installer": "npm init"
+		"batchInstaller": ".\\src\\web-dev.template\\vanilla-hcj"
 	},
 	"solidHTML": {
 		"name": "HTML/CSS with Solid",

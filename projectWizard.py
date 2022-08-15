@@ -37,15 +37,14 @@ def projectWizardSetup():
 
     # Web Development Different Templates
     projectLang = [inquirer.List("projectLang",
-                                    message="Choose a template for your project",
-                                    choices=categorizedTemplate(templateConfig[projectVariant]))]
+                                 message="Choose a template for your project",
+                                 choices=categorizedTemplate(templateConfig[projectVariant]))]
     projectLang = inquirer.prompt(
         projectLang)['projectLang']  # Returned as String
 
     # Checking Needed Requirement For The Installation
-    if checkRequirement(templateLoader(templateConfig[projectVariant],projectVariant)) == False:
+    if checkRequirement(templateLoader(templateConfig[projectVariant], projectLang), projectVariant) == False:
         exit('ERROR: A Needed Requirement For This Template is Missing')
-        
 
     # Acquirer Project Name
     projectName = input('Please type your project\'s name: ')
@@ -56,7 +55,7 @@ def projectWizardSetup():
     projectDir = inquirer.prompt(
         projectDir)['projectDir']  # Returned as String
 
-
+    parentDir = projectDir
     projectDir += projectName+"\\"
     ''' 
     TODO: Add Git Repository Integration
@@ -75,8 +74,9 @@ def projectWizardSetup():
                     default="True")]
     # Confirmed
     if inquirer.prompt(finalConfirm)['confirmation']:
-        # Parameter: projectLang, projectName, projectDirectory
-        executionMainThread(projectLang, projectName, projectDir)
+        # Parameter: ProjectName, Directory and Installer
+        executionMainThread(projectName, projectDir, templateConfig[projectVariant][templateLoader(
+            templateConfig[projectVariant], projectLang)]["batchInstaller"])
     else:
         # Exit out of the program
         print('Setup is now Canceled...')
@@ -89,8 +89,8 @@ if __name__ == '__main__':
     print('''WARNING: This file is running as a standalone file instead of library. \n
             Use this if you wish to debug the projectWizard.py''')
     debuggerConfirmation = [inquirer.Confirm('debugMode',
-                            message= "Do you want to continue in debug mode?",
-                            default = "False")]
+                            message="Do you want to continue in debug mode?",
+                            default="False")]
     if inquirer.prompt(debuggerConfirmation):
         os.system('cls')
         projectWizardSetup()
