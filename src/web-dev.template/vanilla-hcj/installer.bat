@@ -7,15 +7,17 @@
 cd "src"
 set homedir="%cd%"
 
+echo %1
+echo %2
 @REM param: Change to The Installation Directory
-cd %1
-mkdir %2
-cd %2
+@REM cd %1
+@REM mkdir %2
+@REM cd %2
 
-dir %homedir%
+@REM dir
 
-xcopy %homedir% /E
+@REM xcopy %homedir% /E
 
-npm init -y
+@REM npm init -y
 
-exit
+@REM exit

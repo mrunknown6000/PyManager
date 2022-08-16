@@ -3,5 +3,17 @@
 	"python.linting.enabled": false,
 	"cSpell.words": [
 		"tqdm"
+	],
+	"python.testing.pytestArgs": [
+		"test"
+	],
+	"python.testing.unittestEnabled": false,
+	"python.testing.pytestEnabled": true,
+	"python.testing.unittestArgs": [
+		"-v",
+		"-s",
+		"./test",
+		"-p",
+		"test_*.py"
 	]
 }
