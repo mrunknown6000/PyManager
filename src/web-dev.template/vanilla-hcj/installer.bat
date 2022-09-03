@@ -1,23 +1,13 @@
 @echo off
+@REM REMEMBER TO MAKE EVERY COMMAND > NUL 
 
-@REM ! WARNING RUN THIS FILE AT THE TOP DIRECTORY AKA THE OG DIR 
-@REM COMMAND PRE-PROMPTED TEMPLATE INSTALLER FOR PyP v0.1
-
-@REM Variables
 cd "src"
 set homedir="%cd%"
 
-echo %1
-echo %2
-@REM param: Change to The Installation Directory
-@REM cd %1
-@REM mkdir %2
-@REM cd %2
+cd %1 > NUL
+mkdir %2 > NUL
+robocopy %homedir% %2 /e > NUL
 
-@REM dir
-
-@REM xcopy %homedir% /E
-
-@REM npm init -y
-
-@REM exit
+cd %2 > NUL
+npm init -y > NUL
+exit

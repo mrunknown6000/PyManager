@@ -1,7 +1,7 @@
 {
-	"defaultRepoDir": "%UserProfile%\\.src-code\\",
+	"defaultRepoDir": "%UserProfile%\\.src-code",
 	"specificTypeDir": {
-		"python": ".\\Python Projects\\",
-		"web-dev": ".\\Web Developments\\"
+		"python": "\\Python Projects\\",
+		"web-dev": "\\Web Developments\\"
 	}
 }

@@ -4,6 +4,17 @@ from lib.config import *
 from time import sleep
 import os
 
+# External Tools for easier Code
+isDebugging = False
+def isDebug():
+    global isDebugging
+    isDebugging = True
+def pause(sec=3):
+    global isDebugging
+    if isDebugging == False:
+        sleep(3)
+    else:
+        print('INFO || DEBUG MODE - PAUSE IGNORED')
 
 def checkRequirement(templateHeader, templateVariant):
     template = templateConfig[templateVariant][templateHeader]
@@ -12,10 +23,10 @@ def checkRequirement(templateHeader, templateVariant):
     os.system('cls')
 
     print('Checking For Needed Requirement...')
-    sleep(2)
+    pause(2)
     print(f'Checking These Following Requirement: {requirementTitle}')
     result = []
-    sleep(2)
+    pause(2)
 
     for i in executableRequirement:
         if os.system(i) == 0:
@@ -29,7 +40,7 @@ def checkRequirement(templateHeader, templateVariant):
             os.system("cls")
             print('''YAY, Your System Met The Requirement For This Template. 
             \n You will be redirected to the next section in 3 seconds...''')
-            sleep(3)
+            pause(3)
             return True
         # Successful Requirement Test
     else:
@@ -38,10 +49,12 @@ def checkRequirement(templateHeader, templateVariant):
 # Executing Commands
 
 
+
 def progressExecution(templateName, templateDir, templateInstaller):
 
     # Loading Batch Script
-    executionOrder = f"cd {templateInstaller} && installer.bat {templateDir} {templateName}"
+    # templateDir = 
+    executionOrder = f"cd \"{templateInstaller}\" && installer.bat \"{templateDir}\" \"{templateName}\""
 
     # Execution of Commands
     for i in range(100):
@@ -50,10 +63,11 @@ def progressExecution(templateName, templateDir, templateInstaller):
             print('Preparing Installation')
         if i == 10:
             print('Installation Is Now Ready!')
-            sleep(1)
+            pause(1)
             print('Initializing Batch Installer...')
             if os.system(executionOrder) == 1:
-                print('ERROR: An Error Occurred While Using Batch Installer, Please Try Again Later')
+                print('ERROR: An Error Occurred While Using Batch Installer, Please Fix Installer File For Your Specific Configuration')
+                break
         if i == 80:
             print('Installation Is Completed! YAY')
         yield
@@ -64,10 +78,9 @@ def progressExecution(templateName, templateDir, templateInstaller):
 def executionMainThread(name, prgdir, installer):
     '''Executing Project Generation from selected Configuration'''
     print('Initializing Project...')
-    sleep(2)
+    pause(2)
     print('Loading Current Template')
-
-    # !: FIX THIS!!! COMPLETE DEBUG 
+ 
     # Generating Loading Bar
     with alive_bar(100) as bar:
         for i in progressExecution(name, prgdir, installer):

@@ -12,7 +12,6 @@ import inquirer
 
 # Acquire Directory Lists
 
-
 def projectWizardSetup():
     dirList = list(globalConfig["specificTypeDir"].values())
     dirList.append("Custom Specific Directory...")
@@ -55,8 +54,8 @@ def projectWizardSetup():
     projectDir = inquirer.prompt(
         projectDir)['projectDir']  # Returned as String
 
-    parentDir = projectDir
-    projectDir += projectName+"\\"
+    # TODO: Add the defaultRepo into the start of directory
+    projectDir = globalConfig["defaultRepoDir"] + projectDir
     ''' 
     TODO: Add Git Repository Integration
     TODO: Add VScode Integration
@@ -80,7 +79,7 @@ def projectWizardSetup():
     else:
         # Exit out of the program
         print('Setup is now Canceled...')
-        sleep(2)
+        pause(2)
         exit()
 
 
@@ -92,6 +91,7 @@ if __name__ == '__main__':
                             message="Do you want to continue in debug mode?",
                             default="False")]
     if inquirer.prompt(debuggerConfirmation):
+        isDebug()
         os.system('cls')
         projectWizardSetup()
     else:
