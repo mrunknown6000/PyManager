@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from re import template
 from alive_progress import alive_bar
 from lib.config import *
@@ -6,15 +7,25 @@ import os
 
 # External Tools for easier Code
 isDebugging = False
+
+def availChecker(script):
+    if script != None:
+        return True
+    else: return False
+
+
 def isDebug():
     global isDebugging
     isDebugging = True
+
+
 def pause(sec=3):
     global isDebugging
     if isDebugging == False:
         sleep(3)
     else:
         print('INFO || DEBUG MODE - PAUSE IGNORED')
+
 
 def checkRequirement(templateHeader, templateVariant):
     template = templateConfig[templateVariant][templateHeader]
@@ -49,25 +60,34 @@ def checkRequirement(templateHeader, templateVariant):
 # Executing Commands
 
 
-
-def progressExecution(templateName, templateDir, templateInstaller):
-
+def progressExecution(templateName, templateDir, templateInstaller, pyScript):
     # Loading Batch Script
-    # templateDir = 
+    batchInstallerStatus = availChecker(templateInstaller)
+    pyScriptStatus = availChecker(pyScript)
+
+
     executionOrder = f"cd \"{templateInstaller}\" && installer.bat \"{templateDir}\" \"{templateName}\""
 
     # Execution of Commands
     for i in range(100):
         # Use If i for certain % for more specific
-        if i == 5:
-            print('Preparing Installation')
+        if i == 5:                                  # ========== INITIALIZING PREP =========
+            print('Preparing Installation...')
+
+            # CHECKING FOR AVAILABILITY
+            print(f"Batch Installer Status: {batchInstallerStatus}")
+            print(f"PyScript Installer Status: {pyScriptStatus}")    
+
         if i == 10:
             print('Installation Is Now Ready!')
             pause(1)
-            print('Initializing Batch Installer...')
-            if os.system(executionOrder) == 1:
-                print('ERROR: An Error Occurred While Using Batch Installer, Please Fix Installer File For Your Specific Configuration')
-                break
+            if not pyScriptStatus:  
+                print('PyScript Not Available | Initializing Batch Installer...')
+                if os.system(executionOrder) == 1:
+                    print('ERROR: An Error Occurred While Using Batch Installer, Please Fix Installer File For Your Specific Configuration')
+                    break
+            else:
+                exec(open(pyScript).read())
         if i == 80:
             print('Installation Is Completed! YAY')
         yield
@@ -75,15 +95,15 @@ def progressExecution(templateName, templateDir, templateInstaller):
 # Main thread of project generation
 
 
-def executionMainThread(name, prgdir, installer):
+def executionMainThread(name, prgdir, installer, pyScript):
     '''Executing Project Generation from selected Configuration'''
     print('Initializing Project...')
     pause(2)
     print('Loading Current Template')
- 
+
     # Generating Loading Bar
     with alive_bar(100) as bar:
-        for i in progressExecution(name, prgdir, installer):
+        for i in progressExecution(name, prgdir, installer, pyScript):
             bar()
 
 # Load the parents' category from template.config.json
@@ -108,3 +128,5 @@ def templateLoader(templateRoot, templateName):
             return i
     else:
         return None
+
+

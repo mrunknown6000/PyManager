@@ -74,8 +74,10 @@ def projectWizardSetup():
     # Confirmed
     if inquirer.prompt(finalConfirm)['confirmation']:
         # Parameter: ProjectName, Directory and Installer
-        executionMainThread(projectName, projectDir, templateConfig[projectVariant][templateLoader(
-            templateConfig[projectVariant], projectLang)]["batchInstaller"])
+        # TODO: Add PyScript Support
+        executionMainThread(projectName, projectDir, 
+        templateConfig[projectVariant][templateLoader(templateConfig[projectVariant], projectLang)]["batchInstaller"],
+        templateConfig[projectVariant][templateLoader(templateConfig[projectVariant], projectLang)]["wizardPyScript"])
     else:
         # Exit out of the program
         print('Setup is now Canceled...')

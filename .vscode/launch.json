@@ -4,6 +4,7 @@
 	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 	"version": "0.2.0",
 	"configurations": [
+
 		{
 			"name": "Debug Entire Program",
 			"type": "python",
@@ -17,6 +18,14 @@
 			"type": "python",
 			"request": "launch",
 			"program": ".\\projectWizard.py",
+			"console": "integratedTerminal",
+			"justMyCode": true
+		},
+		{
+			"name": "Run test.py File",
+			"type": "python",
+			"request": "launch",
+			"program": ".\\test.py",
 			"console": "integratedTerminal",
 			"justMyCode": true
 		}

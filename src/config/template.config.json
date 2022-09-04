@@ -7,7 +7,8 @@
 		"requirement": ["NodeJS"],
 		"checkRequirement": ["node -v"],
 
-		"batchInstaller": ".\\src\\web-dev.template\\vanilla-hcj"
+		"batchInstaller": ".\\src\\web-dev.template\\vanilla-hcj",
+		"wizardPyScript": null
 	},
 	"solidHTML": {
 		"name": "HTML/CSS with Solid",
@@ -15,13 +16,15 @@
 		"requirement": ["NodeJS"],
 		"checkRequirement": ["node -v"],
 
-		"installer": null
+		"batchInstaller": ".\\src\\web-dev.template\\solid-hcj",
+		"wizardPyScript": null
 	}
 },
 "cli-app": {
 	"templateOrigin": ".\\src\\cli-app.template",
 	"python": {
-
+		"name": "Python Console",
+		"description": "Vanilla Python"
 	}
 },
 "gui-app": {
