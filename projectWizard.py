@@ -1,8 +1,5 @@
-"""
-    THIS IS NOT THE MAIN EXECUTABLE FILE, PLEASE USE main.py INSTEAD
-    ========== CREATE PROJECT WIZARD ==========
-"""
-# External Library
+"""PROJECT GENERATOR WIZARD INSTALLER MODULE"""
+# Database Libraries
 import os
 from lib.config import *
 from lib.functions import *
@@ -10,7 +7,8 @@ from lib.functions import *
 # UI Library
 import inquirer
 
-# Acquire Directory Lists
+# Other Library Integration
+import main
 
 def projectWizardSetup():
     dirList = list(globalConfig["specificTypeDir"].values())
@@ -18,15 +16,15 @@ def projectWizardSetup():
 
     ''' ============= MAIN RUNNING THREAD ============== '''
     # Introduction Guide
-    print('PROJECT GENERATOR CLI v0.1')
+    os.system('cls')
+    print('========== NEW PROJECT WIZARD ==========')
 
-    # Selection
+    # ?: Ask for Project Root Branch
     projectType = [inquirer.List("projectType",
                                  message="Choose your project\'s type for specific template",
                                  choices=["Web Development", "CLI Application", "GUI Application"])]
     projectType = inquirer.prompt(projectType)['projectType']
     projectVariant = ''
-    # Project Switch
     if projectType == 'Web Development':
         projectVariant = "web-dev"
     elif projectType == 'CLI Application':
@@ -34,7 +32,7 @@ def projectWizardSetup():
     elif projectType == 'GUI Application':
         projectVariant = 'gui-app'
 
-    # Web Development Different Templates
+    # ?: Choosing Different Type Of Project Inside a selected branch
     projectLang = [inquirer.List("projectLang",
                                  message="Choose a template for your project",
                                  choices=categorizedTemplate(templateConfig[projectVariant]))]
@@ -45,9 +43,11 @@ def projectWizardSetup():
     if checkRequirement(templateLoader(templateConfig[projectVariant], projectLang), projectVariant) == False:
         exit('ERROR: A Needed Requirement For This Template is Missing')
 
-    # Acquirer Project Name
+    # ?: Inquiring Project Name
     projectName = input('Please type your project\'s name: ')
-    # Project Directory
+    
+    # ?: Inquiring Directory
+    # TODO: Allow Custom Directory :D
     projectDir = [inquirer.List("projectDir",
                                 message="Choose a directory for your project. NOTE: This will be a sub-directory for defaultRepoDir",
                                 choices=dirList)]
@@ -77,12 +77,15 @@ def projectWizardSetup():
         # TODO: Add PyScript Support
         executionMainThread(projectName, projectDir, 
         templateConfig[projectVariant][templateLoader(templateConfig[projectVariant], projectLang)]["batchInstaller"],
-        templateConfig[projectVariant][templateLoader(templateConfig[projectVariant], projectLang)]["wizardPyScript"])
+        templateConfig[projectVariant][templateLoader(templateConfig[projectVariant], projectLang)]["wizardPyScript"],
+        projectLang)
+        # Return back to main menu
+        main.mainMenu()
     else:
         # Exit out of the program
         print('Setup is now Canceled...')
         pause(2)
-        exit()
+        main.mainMenu()
 
 
 # DEBUGGING SPECIFIC FEATURE MODE

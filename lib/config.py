@@ -23,7 +23,9 @@ import json
 	}
 	}
 '''
+''' === PROPERTIES INSIDE A PROJECT_INFO CONFIG FILE ===
 
+'''
 
 # Loading Global Configuration
 CONFIG_DIR = ".\\src\\config\\config.json"
@@ -31,8 +33,33 @@ readData = open(CONFIG_DIR, "r", encoding="utf-8")
 globalConfig = json.load(readData)
 readData.close()
 
+
 # Loading Template Configuration
 TEMPLATE_DIR = ".\\src\\config\\template.config.json"
 readData = open(TEMPLATE_DIR, "r", encoding="utf-8")
 templateConfig = json.load(readData)
 readData.close()
+
+
+# Project IO System :D
+PROJECT_CONF_DIR = ".\\src\\config\\projectInfo.json"
+projectConf = {}
+
+# ? Reading Data From Config File
+def readProjectData():
+	global projectConf
+
+	readData = open(PROJECT_CONF_DIR, "r", encoding="utf-8")
+	projectConf = json.load(readData)
+def writeProjectData(overrideData):
+	global projectConf
+
+	# Inserting New Data
+	with open(PROJECT_CONF_DIR, "w") as writeData:
+		json.dump(overrideData, writeData)
+
+	# Read New Data
+	projectConf = readProjectData()
+
+readProjectData()
+
