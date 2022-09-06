@@ -13,6 +13,13 @@
 ## Installation (Pre-release Coming Soon!)
 ## Development Status
 - Futures Features:
+	- [ ] Core Component
+		- [X] New Project Generation
+		- [ ] Core UI
+		- [ ] Project Manager
+		- [ ] Setting Interface
+		- [ ] Project Migration
+		- [ ] External Plugin Support
 	- [ ] Git Integration
 	- [ ] Docker Integration
 
