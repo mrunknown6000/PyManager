@@ -22,6 +22,14 @@
 			"justMyCode": true
 		},
 		{
+			"name": "Debug projectExplorer",
+			"type": "python",
+			"request": "launch",
+			"program": ".\\projectExplorer.py",
+			"console": "integratedTerminal",
+			"justMyCode": true
+		},
+		{
 			"name": "Run test.py File",
 			"type": "python",
 			"request": "launch",

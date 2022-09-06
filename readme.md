@@ -22,4 +22,7 @@
 		- [ ] External Plugin Support
 	- [ ] Git Integration
 	- [ ] Docker Integration
+	- [ ] Graphical User Interface
+		- [ ] Design Layout
+		- [ ] Integration With Current Code
 

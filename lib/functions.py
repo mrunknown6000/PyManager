@@ -84,7 +84,7 @@ def progressExecution(templateName, templateDir, templateInstaller, pyScript, pr
                 exec(open(pyScript).read())
         if i == 60:             # ========= ADDING TO JSON FILE ========
             print('Listing Project Into A Compatible Save File...')
-            projectConf[templateName] = {"Project Status": "Fresh", "directory": templateDir+templateName, "projectType": projectType}
+            projectConf[templateName] = {"directory": templateDir+templateName, "projectType": projectType}
             writeProjectData(projectConf)
         if i == 80:
             print('Finalizing Installation...')
